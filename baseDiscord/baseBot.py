@@ -68,7 +68,7 @@ class BaseBot(commands.Bot):
 		pass
 
 	def get_invitation(self, permissions: int = None):
-		return f"https://discord.com/api/oauth2/authorize?client_id={self.app_info.id}&permissions={permissions is permissions else self.permissions}&scope=applications.commands%20bot"
+		return f"https://discord.com/api/oauth2/authorize?client_id={self.app_info.id}&permissions={permissions if permissions else self.permissions}&scope=applications.commands%20bot"
 
 	def run(self):
 		super().run(self.token)
