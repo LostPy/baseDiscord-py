@@ -6,7 +6,6 @@ from discord.ext import commands
 from discord_slash import cog_ext
 from discord_slash.utils.manage_commands import create_option, create_choice
 
-from ..utils import __logger_baseBot as logger
 from ..utils.checks import is_app_owner_or_whitelist
 from ..utils.manage_messages import safe_delete
 
@@ -33,7 +32,7 @@ class Owner(commands.Cog):
 		em.description = "The bot will be logout in 5 seconds."
 		await ctx.send(embed=em, delete_after=delay-1)
 
-		logger.warning(f"{ctx.author.name} disconnected the bot.")
+		self.bot.logger.warning(f"{ctx.author.name} disconnected the bot.")
 
 		await asyncio.sleep(delay)
 		await self.bot.logout()

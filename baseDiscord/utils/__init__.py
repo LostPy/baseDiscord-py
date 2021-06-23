@@ -64,6 +64,3 @@ def new_logger(name: str, *,
 
 	logger.setLevel(level)
 	return logger
-
-
-__logger_baseBot = new_logger("BaseBot", level=__logging.DEBUG)
