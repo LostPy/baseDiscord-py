@@ -22,7 +22,7 @@ class BaseBot(commands.Bot):
 		self.permissions = int(permissions)
 		self.app_info = None  # load in on_ready event
 		self.avatar_url = None  # load in on_ready event
-		self.logger = logger if logger else new_logger(self.__class__.__name__)
+		self.logger = logger if logger else new_logger(self.__class__.__name__ if self.__class__.__name__ != 'BaseBot' else 'TestBaseBot')
 
 
 		if isinstance(color, discord.Colour):
@@ -64,8 +64,52 @@ class BaseBot(commands.Bot):
 		pass
 
 	async def on_command_error(self, ctx, exception):
+
+		await ctx.message.delete(delay=1)
+
+		em_error = None
+
+		if isinstance(exception, commands.errors.CommandNotFound):
+			return
+
+		elif isinstance(exception, commands.errors.BadArgument):
+			em_error = discord.Embed(title="Bad Argument Error", color=self.color_error)
+			em_error.description = "One or several arguments are not of type asked. Use the help command for more details."
+
+		elif isinstance(exception, commands.errors.MissingRequiredArgument):
+			em_error = discord.Embed(title="Missing Required Argument", color=self.color_error)
+			em_error.description = "Missing one or several argument required. Use the help command for more details"
+
+		elif isinstance(exception, commands.errors.MissingPermissions):
+			em_error = discord.Embed(title="Missing Permissions Error", color=self.color_error)
+			em_error.description = f"You have not the permissions to use this command: {exception.missing_perms}"
+
+		elif isinstance(exception, commands.errors.MissingRoles):
+			em_error = discord.Embed(title="Missing Roles Error", color=self.color_error)
+			em_error.description = f"You missing roles to use this command: {exception.missing_roles}"
+
+		elif isinstance(exception, commands.errors.BotMissingPermissions):
+			em_error = discord.Embed(title="Bot Missing Permissions Error", color=self.color_error)
+			em_error.description = f"I missing permissions: {exception.missing_perms}"
+
+		elif isinstance(exception, commands.errors.BotMissingRole):
+			em_error = discord.Embed(title="Bot Missing Roles Error", color=self.color_error)
+			em_error.description = f"I missing roles: {exception.missing_roles}"
+
+		elif isinstance(exception, (commands.errors.CommandOnCooldown, )):
+			return
+
+		if em_error:
+			try:
+				em_error.set_thumbnail(url=self.avatar_url)
+				return await ctx.send(embed=em_error, delete_after=8)
+			except discord.Forbidden:
+				try:
+					return await ctx.author.send(content="I have not the permission to send message in this channel", embed=em_error, delete_after=10)
+				except discord.Forbidden:
+					pass
+
 		await super().on_command_error(ctx, exception)
-		pass
 
 	def get_invitation(self, permissions: int = None):
 		return f"https://discord.com/api/oauth2/authorize?client_id={self.app_info.id}&permissions={permissions if permissions else self.permissions}&scope=applications.commands%20bot"

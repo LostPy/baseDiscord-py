@@ -63,7 +63,6 @@ def new_logger(name: str, *,
 		logger.addHandler(file_handler)
 
 	logger.setLevel(level)
-	logger.success("test log success")
 	return logger
 
 

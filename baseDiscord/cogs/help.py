@@ -37,7 +37,6 @@ class Help(commands.Cog):
 
 	def _init_categories(self):
 		global categories_commands, commands
-		print(self.bot.cogs)
 		categories_commands = ['No category'] + [cog for cog in self.bot.cogs]
 
 	def _base_embed(self, title: str, description: str = "", author: discord.User = None) -> discord.Embed:
@@ -51,13 +50,13 @@ class Help(commands.Cog):
 		return f"{cmd.description}\n**Name:** {cmd.name}\nhelp: {cmd.brief}"
 
 	def _command_usage(self, cmd: commands.Command) -> str:
-		return f"Usage: `{self.bot.command_prefix}{cmd.name} {cmd.usage}`"
+		return f"Usage: `{self.bot.command_prefix}{cmd.name} {cmd.usage}`" if cmd.usage else "\r"
 
 	def _command_aliases(self, cmd: commands.Command) -> str:
-		return f"""Aliases: {"`, `".join(cmd.aliases) + "`"}""" if len(cmd.aliases) > 0 else ""
+		return f"""Aliases: {"`, `".join(cmd.aliases) + "`"}""" if len(cmd.aliases) > 0 else "\r"
 
 	def _command_help_fmt(self, cmd: commands.Command) -> str:
-		return "\n".join([self._command_base(cmd), self._command_usage(cmd) + self._command_aliases(cmd)])
+		return "\n".join([self._command_base(cmd), self._command_usage(cmd), self._command_aliases(cmd)])
 
 	def first_page(self, author: discord.User = None) -> discord.Embed:
 		desc_bot = f"""{self.bot.description}\n\nPrefix: {self.bot.command_prefix}\nAuthor: {self.bot.app_info.owner.name}"""
@@ -111,7 +110,6 @@ class Help(commands.Cog):
 		Future: Add a Select component to naigate between pages.
 		"""
 
-		print(self.bot.commands)
 		pages = [self.first_page(ctx.author)] + self.commands_pages(list(self.bot.commands), author=ctx.author)
 		for cog in self.bot.cogs.values():
 			pages += self.commands_pages(cog, author=ctx.author)
