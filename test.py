@@ -7,7 +7,7 @@ from baseDiscord import BaseBot, Help, Owner
 
 # Setting
 
-TOKEN = "ODUzMDI5MjQxODU5NzM1NjEy.YMPbYw.Ch6QA0t4nDDH1jjXReneFAqzBFA"
+TOKEN = "my token"
 COLOR = discord.Colour.green()
 COLOR_ERROR = discord.Colour.red()
 PERMISSIONS = 2147608640
