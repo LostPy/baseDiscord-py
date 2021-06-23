@@ -15,14 +15,34 @@ A small package built on [discord.py][discord-py]. This package implement a base
 
  * [discord.py][discord-py]
  * [discord-py-slash-command][slash]
- * [discord-components][components]
 
 
-## Features
+## Main Features
 
 |Name|Description|First Version|last version|
-|----|-----------|-------------|------------|
-|||||
+|----|-----------|:-----------:|:----------:|
+|Manage CommandNotFound error|Ignore CommandNotFound exception|1.0|✔️|
+|Manage BadArgument error|Send a error message|1.0|✔️|
+|Manage MissingPermissions|Send a error message with list of permissions required|1.0|✔️|
+|Manage MissingRoles|Send a error message with list of roles required|1.0|✔️|
+|Manage BotMissingPermissions|Send a error message with list of permissions required|1.0|✔️|
+|Manage BotMissingRoles|Send a error message with list of roles required|1.0|✔️|
+|Traceback message to owner|Send a message with traceback to the owner of application if a error raised is not manage and if `BaseBot.send_errors` is `True`|1.0|✔️|
+|Help cog|a [cog][cog] for help commands|1.0|✔️|
+|Help slash command|A Slash commands help to replace the default help command of `discord.py`|1.0|✔️|
+|Owner cog|A [cog][cog] for only owner application commands|1.0|✔️|
+|`stopBot`|A command of `Owner` [cog][cog] to stop the bot|1.0|✔️|
+|`BaseBot.get_invitation`|Method to get a invitation link|1.0|✔️|
+|Colored log|A formater for colored logs. A logger can be created with `baseDiscord.utils.new_logger` function|1.0|✔️|
+
+> ℹ️ All message errors are send in a embed
 
 
 ## Changelog
+
+⚠️ 
+
+
+[discord-py]: https://discordpy.readthedocs.io/en/latest/index.html
+[slash]: https://discord-py-slash-command.readthedocs.io/en/latest/quickstart.html
+[cog]: https://discordpy.readthedocs.io/en/latest/ext/commands/cogs.html
