@@ -1,5 +1,7 @@
 from typing import Union
 import asyncio
+import traceback
+from datetime import datetime
 
 import discord
 from discord.ext import commands
@@ -14,15 +16,14 @@ class BaseBot(commands.Bot):
 		- can send errors in DM to the owner
 	"""
 
-	def __init__(self, token: str, *args, color: discord.Colour, color_error: discord.Colour, send_errors: bool = False, print_traceback: bool = True, permissions: int = 0, logger=None, **kwargs):
+	def __init__(self, token: str, *args, color: discord.Colour, color_error: discord.Colour, send_errors: bool = False, permissions: int = 0, logger=None, **kwargs):
 		super().__init__(*args, **kwargs)
 		self.token = str(token)
 		self.send_errors = bool(send_errors)
-		self.print_traceback = bool(print_traceback)
 		self.permissions = int(permissions)
 		self.app_info = None  # load in on_ready event
 		self.avatar_url = None  # load in on_ready event
-		self.logger = logger if logger else new_logger(self.__class__.__name__ if self.__class__.__name__ != 'BaseBot' else 'TestBaseBot')
+		self.logger = logger if logger else new_logger(self.__class__.__name__)
 
 
 		if isinstance(color, discord.Colour):
@@ -54,10 +55,10 @@ class BaseBot(commands.Bot):
 		self.message_on_ready()
 
 	async def on_connect(self):
-		self.logger.debug('connected!')
+		await super().connect()
 
 	async def on_disconnect(self):
-		self.logger.debug("disconnected!")
+		await super().disconnect()
 
 	async def on_error(self, event, *args, **kwargs):
 		await super().on_error(event, *args, **kwargs)
@@ -96,8 +97,14 @@ class BaseBot(commands.Bot):
 			em_error = discord.Embed(title="Bot Missing Roles Error", color=self.color_error)
 			em_error.description = f"I missing roles: {exception.missing_roles}"
 
-		elif isinstance(exception, (commands.errors.CommandOnCooldown, )):
-			return
+		else:
+			if self.send_errors:
+				em = discord.Embed(title="Exception raised", color=self.color_error)
+				em.description = f"A exception was raised in a command:\n{traceback.format_exc(chain=False)}"
+				em.set_thumbnail(url=self.avatar_url)
+				em.set_footer(text=datetime.now().strftime("%Y-%m-%d at %H:%M:%S"))
+				self.logger.exception(f"A exception was raised: {type(exception)}")
+				await self.app_info.owner.send(embed=em)
 
 		if em_error:
 			try:
