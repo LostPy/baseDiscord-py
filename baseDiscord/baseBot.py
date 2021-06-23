@@ -42,7 +42,7 @@ class BaseBot(commands.Bot):
 
 		self.remove_command('help')
 
-	def message_on_ready(self):
+	def messages_on_ready(self):
 		self.logger.info(f"Logged in as {self.user.name} - {self.user.id}")
 		self.logger.info('-'*10 + '\n')
 
@@ -52,7 +52,7 @@ class BaseBot(commands.Bot):
 
 	async def on_ready(self):
 		await self.init_on_ready()
-		self.message_on_ready()
+		self.messages_on_ready()
 
 	async def on_connect(self):
 		await super().connect()
