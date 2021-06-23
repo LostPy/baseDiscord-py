@@ -8,7 +8,8 @@ A small package built on [discord.py][discord-py]. This package implement a base
  * Author: LostPy
  * Date created: 2021-06-22
  * Last update: 2021-06-22
- * Version: 0.1
+ * Version: 1.0
+ * [Documentation][doc]
 
 
 ## Requirements
@@ -29,7 +30,7 @@ A small package built on [discord.py][discord-py]. This package implement a base
 |Manage BotMissingRoles|Send a error message with list of roles required|1.0|✔️|
 |Traceback message to owner|Send a message with traceback to the owner of application if a error raised is not manage and if `BaseBot.send_errors` is `True`|1.0|✔️|
 |Help cog|a [cog][cog] for help commands|1.0|✔️|
-|Help slash command|A Slash commands help to replace the default help command of `discord.py`|1.0|✔️|
+|Help slash command|A help Slash command to replace the default help command of `discord.py`|1.0|✔️|
 |Owner cog|A [cog][cog] for only owner application commands|1.0|✔️|
 |`stopBot`|A command of `Owner` [cog][cog] to stop the bot|1.0|✔️|
 |`BaseBot.get_invitation`|Method to get a invitation link|1.0|✔️|
@@ -46,3 +47,4 @@ A small package built on [discord.py][discord-py]. This package implement a base
 [discord-py]: https://discordpy.readthedocs.io/en/latest/index.html
 [slash]: https://discord-py-slash-command.readthedocs.io/en/latest/quickstart.html
 [cog]: https://discordpy.readthedocs.io/en/latest/ext/commands/cogs.html
+[doc]: https://lostpy.gitbook.io/basediscord-py/
