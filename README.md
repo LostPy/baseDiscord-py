@@ -8,7 +8,8 @@ A small package built on [discord.py][discord-py]. This package implement a base
  * Author: LostPy
  * Date created: 2021-06-22
  * Last update: 2021-06-22
- * Version: 0.1
+ * Version: 1.0
+ * [Documentation][doc]
 
 
 ## Requirements
@@ -46,3 +47,4 @@ A small package built on [discord.py][discord-py]. This package implement a base
 [discord-py]: https://discordpy.readthedocs.io/en/latest/index.html
 [slash]: https://discord-py-slash-command.readthedocs.io/en/latest/quickstart.html
 [cog]: https://discordpy.readthedocs.io/en/latest/ext/commands/cogs.html
+[doc]: https://lostpy.gitbook.io/basediscord-py/
