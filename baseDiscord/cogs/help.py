@@ -26,7 +26,7 @@ class Help(commands.Cog):
 			- other pages (commands)
 	"""
 
-	def __init__(self, bot: Union[discord.Client, commands.Bot], max_cmd_by_page: int = 8):
+	def __init__(self, bot: commands.Bot, max_cmd_by_page: int = 8):
 		super().__init__()
 		if not isinstance(bot, (discord.Client, discord.ext.commands.Bot)):
 			raise ValueError(f"bot must be an instance of 'discord.Client' or 'discord.ext.Bot', not an instance of {type(bot)}")

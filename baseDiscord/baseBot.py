@@ -16,7 +16,7 @@ class BaseBot(commands.Bot):
 		- can send errors in DM to the owner
 	"""
 
-	def __init__(self, token: str, *args, color: discord.Colour, color_error: discord.Colour, send_errors: bool = False, permissions: int = 0, logger=None, **kwargs):
+	def __init__(self, token: str, *args, color: discord.Colour, color_error: discord.Colour = discord.Colour.red(), send_errors: bool = False, permissions: int = 0, logger=None, **kwargs):
 		super().__init__(*args, **kwargs)
 		self.token = str(token)
 		self.send_errors = bool(send_errors)
