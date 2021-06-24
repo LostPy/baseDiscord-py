@@ -20,11 +20,13 @@ A small package built on [discord.py][discord-py]. This package implement a base
 
 ## Installation
 
-To install this package, you can use ```
+To install this package, you can use
+```
 pip install git+https://github.com/LostPy/baseDiscord-py.git@master
 ```
 
-To update the package, you can use ```
+To update the package, you can use
+```
 pip install -U git+https://github.com/LostPy/baseDiscord-py.git@master
 ```
 
