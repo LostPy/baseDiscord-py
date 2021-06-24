@@ -5,7 +5,7 @@ A small package built on [discord.py][discord-py]. This package implement a base
 
 ## Overview
 
- * Author: LostPy
+ * Author: [LostPy][me]
  * Date created: 2021-06-22
  * Last update: 2021-06-22
  * Version: 1.0
@@ -16,7 +16,17 @@ A small package built on [discord.py][discord-py]. This package implement a base
 
  * [discord.py][discord-py]
  * [discord-py-slash-command][slash]
+ * [colorama][colorama]
 
+## Installation
+
+To install this package, you can use ```
+pip install git+https://github.com/LostPy/baseDiscord-py.git@master
+```
+
+To update the package, you can use ```
+pip install -U git+https://github.com/LostPy/baseDiscord-py.git@master
+```
 
 ## Main Features
 
@@ -41,10 +51,10 @@ A small package built on [discord.py][discord-py]. This package implement a base
 
 ## Changelog
 
-⚠️ 
-
 
 [discord-py]: https://discordpy.readthedocs.io/en/latest/index.html
 [slash]: https://discord-py-slash-command.readthedocs.io/en/latest/quickstart.html
+[colorama]: https://pypi.org/project/colorama/
 [cog]: https://discordpy.readthedocs.io/en/latest/ext/commands/cogs.html
 [doc]: https://lostpy.gitbook.io/basediscord-py/
+[me]: https://github.com/LostPy/
