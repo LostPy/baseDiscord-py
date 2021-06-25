@@ -54,12 +54,6 @@ class BaseBot(commands.Bot):
 		await self.init_on_ready()
 		self.messages_on_ready()
 
-	async def on_connect(self):
-		await super().connect()
-
-	async def on_disconnect(self):
-		await super().disconnect()
-
 	async def on_error(self, event, *args, **kwargs):
 		await super().on_error(event, *args, **kwargs)
 		pass
