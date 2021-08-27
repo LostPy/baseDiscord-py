@@ -35,7 +35,10 @@ class Owner(commands.Cog):
 		self.bot.logger.warning(f"{ctx.author.name} disconnected the bot.")
 
 		await asyncio.sleep(delay)
-		await self.bot.logout()
+		try:
+			await self.bot.close()
+		except AttributeError:  # old discord.py versions
+			await self.bot.logout()
 
 	@classmethod
 	def setup(cls, bot: commands.Bot, *args, **kwargs):
