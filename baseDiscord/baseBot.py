@@ -79,7 +79,7 @@ class BaseBot(commands.Bot):
 			em_error = discord.Embed(title="Missing Permissions Error", color=self.color_error)
 			em_error.description = f"You have not the permissions to use this command: {exception.missing_perms}"
 
-		elif isinstance(exception, commands.errors.MissingRoles):
+		elif isinstance(exception, commands.errors.MissingRole):
 			em_error = discord.Embed(title="Missing Roles Error", color=self.color_error)
 			em_error.description = f"You missing roles to use this command: {exception.missing_roles}"
 
