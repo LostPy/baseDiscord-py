@@ -16,7 +16,7 @@ class BaseBot(commands.Bot):
 		- can send errors in DM to the owner
 	"""
 
-	def __init__(self, token: str, *args, color: discord.Colour, color_error: discord.Colour, send_errors: bool = False, permissions: int = 0, logger=None, **kwargs):
+	def __init__(self, token: str, *args, color: discord.Colour, color_error: discord.Colour = discord.Colour.red(), send_errors: bool = False, permissions: int = 0, logger=None, **kwargs):
 		super().__init__(*args, **kwargs)
 		self.token = str(token)
 		self.send_errors = bool(send_errors)
@@ -53,12 +53,6 @@ class BaseBot(commands.Bot):
 	async def on_ready(self):
 		await self.init_on_ready()
 		self.messages_on_ready()
-
-	async def on_connect(self):
-		await super().connect()
-
-	async def on_disconnect(self):
-		await super().disconnect()
 
 	async def on_error(self, event, *args, **kwargs):
 		await super().on_error(event, *args, **kwargs)
