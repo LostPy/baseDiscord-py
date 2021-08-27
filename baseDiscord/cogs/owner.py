@@ -16,9 +16,9 @@ class Owner(commands.Cog):
 		- stopbot: a command to disconnect the bot
 	"""
 
-	def __init__(self, bot: Union[discord.Client, commands.Bot]):
+	def __init__(self, bot: commands.Bot):
 		super().__init__()
-		if not isinstance(bot, (discord.Client, discord.ext.commands.Bot)):
+		if not isinstance(bot, discord.ext.commands.Bot):
 			raise ValueError(f"bot must be an instance of 'discord.Client' or 'discord.ext.Bot', not an instance of {type(bot)}")
 		self.bot = bot
 		self.description = "Utils commands for the owner of Bot."
@@ -35,7 +35,10 @@ class Owner(commands.Cog):
 		self.bot.logger.warning(f"{ctx.author.name} disconnected the bot.")
 
 		await asyncio.sleep(delay)
-		await self.bot.logout()
+		try:
+			await self.bot.close()
+		except AttributeError:  # old discord.py versions
+			await self.bot.logout()
 
 	@classmethod
 	def setup(cls, bot: commands.Bot, *args, **kwargs):

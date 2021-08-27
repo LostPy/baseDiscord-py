@@ -26,7 +26,7 @@ class Help(commands.Cog):
 			- other pages (commands)
 	"""
 
-	def __init__(self, bot: Union[discord.Client, commands.Bot], max_cmd_by_page: int = 8):
+	def __init__(self, bot: commands.Bot, max_cmd_by_page: int = 8):
 		super().__init__()
 		if not isinstance(bot, (discord.Client, discord.ext.commands.Bot)):
 			raise ValueError(f"bot must be an instance of 'discord.Client' or 'discord.ext.Bot', not an instance of {type(bot)}")
@@ -110,7 +110,7 @@ class Help(commands.Cog):
 		Future: Add a Select component to naigate between pages.
 		"""
 
-		pages = [self.first_page(ctx.author)] + self.commands_pages(list(self.bot.commands), author=ctx.author)
+		pages = [self.first_page(ctx.author)]
 		for cog in self.bot.cogs.values():
 			pages += self.commands_pages(cog, author=ctx.author)
 		
@@ -121,10 +121,12 @@ class Help(commands.Cog):
 		current_embed.set_footer(text=f"page: {current_page}/{nb_pages} - {current_embed.title}")
 		
 		components = create_actionrow(
-				create_button(style=ButtonStyle.blue, emoji="◀️", custom_id='previous'),
-				create_button(style=ButtonStyle.red, emoji="⏹️", custom_id='stop'),
-				create_button(style=ButtonStyle.blue, emoji="▶️", custom_id='next'),
-			) if nb_pages > 1 else create_actionrow(create_button(style=ButtonStyle.red, emoji="⏹️", custom_id='stop'))
+				create_button(style=ButtonStyle.blue, emoji="⬅️", custom_id='previous'),
+				create_button(style=ButtonStyle.red, label="Delete", custom_id='stop'),
+				create_button(style=ButtonStyle.blue, emoji="➡️", custom_id='next')
+			) if nb_pages > 1 else create_actionrow(
+				create_button(style=ButtonStyle.red, label="Delete", custom_id='stop')
+			)
 
 		if dm:
 			help_msg = await ctx.author.send(embed=current_embed, components=[components])
