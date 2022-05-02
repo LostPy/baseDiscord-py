@@ -1,7 +1,7 @@
 from os import environ
 import discord
 
-from baseDiscord import BaseBot, SlashHelp, Owner
+from baseDiscord import BaseBot
 
 
 # Setting

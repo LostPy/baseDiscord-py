@@ -147,11 +147,6 @@ class BaseBot(commands.Bot):
 
         await super().on_command_error(ctx, exception)
 
-    async def on_message(self, message):
-        if not message.author.bot:
-            print(message.content)
-            await message.channel.send(f"{message.author.mention} said: {message.content}")
-
     def get_invitation(self, permissions: int = None):
         return "https://discord.com/api/oauth2/authorize?"\
                f"client_id={self.app_info.id}&"\
