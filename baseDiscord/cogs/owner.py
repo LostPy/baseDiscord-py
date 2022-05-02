@@ -1,45 +1,36 @@
-from typing import Union
 import asyncio
 
 import discord
+from discord.commands import permissions
 from discord.ext import commands
-from discord_slash import cog_ext
-from discord_slash.utils.manage_commands import create_option, create_choice
-
-from ..utils.checks import is_app_owner_or_whitelist
-from ..utils.manage_messages import safe_delete
 
 
 class Owner(commands.Cog):
-	"""A cog to implement a some commands utils for owner of Bot.
-	List commands:
-		- stopbot: a command to disconnect the bot
-	"""
+    """A cog to implement a some commands utils for owner of Bot.
+    List commands:
+        - stopbot: a command to disconnect the bot
+    """
 
-	def __init__(self, bot: commands.Bot):
-		super().__init__()
-		if not isinstance(bot, discord.ext.commands.Bot):
-			raise ValueError(f"bot must be an instance of 'discord.Client' or 'discord.ext.Bot', not an instance of {type(bot)}")
-		self.bot = bot
-		self.description = "Utils commands for the owner of Bot."
+    def __init__(self):
+        super().__init__()
+        self.description = "Utils commands for the owner of Bot."
 
-	@commands.command("stopbot", aliases=('stopBot', 'stopB', 'StopBot', 'STOPBOT'), description="Command to stop the bot", hidden=True)
-	@is_app_owner_or_whitelist()
-	async def stop_bot(self, ctx, delay: int = 5):
-		"""Command to stop the bot"""
-		await safe_delete(ctx.message, delay=5)
-		em = discord.Embed(title="Logout in progress...", color=self.bot.color)
-		em.description = "The bot will be logout in 5 seconds."
-		await ctx.send(embed=em, delete_after=delay-1)
+    @discord.slash_command(name="stopbot")
+    @permissions.is_owner()
+    async def stop_bot(self, ctx, delay: int = 5):
+        """Command to stop the bot"""
+        em = discord.Embed(title="Logout in progress...", color=ctx.bot.color)
+        em.description = f"The bot will be logout in {delay} seconds."
+        await ctx.respond(embed=em, ephemeral=True)
 
-		self.bot.logger.warning(f"{ctx.author.name} disconnected the bot.")
+        try:
+            ctx.bot.logger.warning(f"{ctx.author.name} disconnected the bot.")
+        except AttributeError:
+            print(f"{ctx.author.name} disconnected the bot.")
 
-		await asyncio.sleep(delay)
-		try:
-			await self.bot.close()
-		except AttributeError:  # old discord.py versions
-			await self.bot.logout()
+        await asyncio.sleep(delay)
+        await ctx.bot.close()
 
-	@classmethod
-	def setup(cls, bot: commands.Bot, *args, **kwargs):
-		bot.add_cog(cls(bot, *args, **kwargs))
+
+def setup(bot: commands.Bot, *args, **kwargs):
+    bot.add_cog(Owner(*args, **kwargs))

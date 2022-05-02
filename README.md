@@ -1,21 +1,22 @@
 # BaseDiscord
 
-A small package built on [discord.py][discord-py]. This package implement a base of bot with help commands, stop bot commands and other global commands.  
+A small package built on [py-cord][pycord] (since the 2.0). This package implement a base of bot with help commands, stop bot commands and other global commands.  
+
+**Note:** This package is useful if you want use prefixed commands. To work, your bot must be authorized to read messages contents.
 
 
 ## Overview
 
  * Author: [LostPy][me]
  * Date created: 2021-06-22
- * Last update: 2021-06-22
- * Version: 1.0
+ * Last update: 2022-05-02
+ * Version: 2.0
  * [Documentation][doc]
 
 
 ## Requirements
 
- * [discord.py][discord-py]
- * [discord-py-slash-command][slash]
+ * [py-cord][pycord]
  * [colorama][colorama]
 
 ## Installation
@@ -54,9 +55,8 @@ pip install -U git+https://github.com/LostPy/baseDiscord-py.git@master
 ## Changelog
 
 
-[discord-py]: https://discordpy.readthedocs.io/en/latest/index.html
-[slash]: https://discord-py-slash-command.readthedocs.io/en/latest/quickstart.html
+[pycord]: https://docs.pycord.dev/en/master/
 [colorama]: https://pypi.org/project/colorama/
-[cog]: https://discordpy.readthedocs.io/en/latest/ext/commands/cogs.html
+[cog]: https://docs.pycord.dev/en/master/ext/commands/cogs.html
 [doc]: https://lostpy.gitbook.io/basediscord-py/
 [me]: https://github.com/LostPy/

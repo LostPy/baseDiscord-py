@@ -1,2 +1,2 @@
-from .help import Help
+from .help import SlashHelp
 from .owner import Owner

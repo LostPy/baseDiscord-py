@@ -1,0 +1,15 @@
+
+[tool.pyflow]
+name = "baseDiscord"
+py_version = "3.9"
+version = "0.2.0"
+
+[tool.pyflow.scripts]
+
+[tool.pyflow.dependencies]
+py-cord = "==2.0.0b7"
+colorama = "^0.4.2"
+orjson = "^3.6.8"
+
+[tool.pyflow.dev-dependencies]
+
