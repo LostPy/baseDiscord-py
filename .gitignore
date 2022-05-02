@@ -1,3 +1,11 @@
 # pycache
 __pycache__
 **/__pycache__
+
+# python dist
+dist/
+build/
+
+# pyflow
+__pypackages__/
+pyflow.lock
